@@ -68,9 +68,9 @@ def main(screen):
     curses.init_pair(8, curses.COLOR_BLACK, curses.COLOR_BLACK)
 
 
-  scramble_len = 40
-  tilesize = 1.0
-  gapsize = 0.35
+  scramble_len = config.SCRAMBLE_LEN
+  tilesize = config.TILE_SIZE
+  gapsize = config.GAP_SIZE
   origin = [0.0, 0.0, 7.5]
   #origin = [0.0, 0.0, 5.5]
   cam_location = [0.0, 0.0, 0.0]
