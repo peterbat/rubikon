@@ -1,3 +1,5 @@
+#!/usr/bin/env python2
+
 import curses, time, random, sys, math
 import config
 import matrix, graphics3d
