@@ -134,8 +134,12 @@ class Cube:
       tiles.extend(self.faces['U'].get_row(2))
       tiles.extend(self.faces['U'].get_col(2))
       tiles.extend(self.faces['U'].get_row(1))
-      tiles = list(set(tiles))
-    elif 'F' in trans:
+      if 'W' in trans:
+        tiles.extend(self.faces['F'].get_row(1))
+        tiles.extend(self.faces['R'].get_row(1))
+        tiles.extend(self.faces['B'].get_row(1))
+        tiles.extend(self.faces['L'].get_row(1))
+    if 'F' in trans:
       tiles.extend(self.faces['U'].get_row(2))
       tiles.extend(self.faces['L'].get_col(2))
       tiles.extend(self.faces['D'].get_row(0))
@@ -145,8 +149,12 @@ class Cube:
       tiles.extend(self.faces['F'].get_row(2))
       tiles.extend(self.faces['F'].get_col(2))
       tiles.extend(self.faces['F'].get_row(1))
-      tiles = list(set(tiles))
-    elif 'R' in trans:
+      if 'W' in trans:
+        tiles.extend(self.faces['U'].get_row(1))
+        tiles.extend(self.faces['R'].get_col(1))
+        tiles.extend(self.faces['D'].get_row(1))
+        tiles.extend(self.faces['L'].get_col(1))
+    if 'R' in trans:
       tiles.extend(self.faces['U'].get_col(2))
       tiles.extend(self.faces['F'].get_col(2))
       tiles.extend(self.faces['D'].get_col(2))
@@ -156,8 +164,12 @@ class Cube:
       tiles.extend(self.faces['R'].get_row(2))
       tiles.extend(self.faces['R'].get_col(2))
       tiles.extend(self.faces['R'].get_row(1))
-      tiles = list(set(tiles))
-    elif 'B' in trans:
+      if 'W' in trans:
+        tiles.extend(self.faces['U'].get_col(1))
+        tiles.extend(self.faces['F'].get_col(1))
+        tiles.extend(self.faces['D'].get_col(1))
+        tiles.extend(self.faces['B'].get_col(1))
+    if 'B' in trans:
       tiles.extend(self.faces['U'].get_row(0))
       tiles.extend(self.faces['R'].get_col(2))
       tiles.extend(self.faces['D'].get_row(2))
@@ -167,8 +179,7 @@ class Cube:
       tiles.extend(self.faces['B'].get_row(2))
       tiles.extend(self.faces['B'].get_col(2))
       tiles.extend(self.faces['B'].get_row(1))
-      tiles = list(set(tiles))
-    elif 'L' in trans:
+    if 'L' in trans:
       tiles.extend(self.faces['U'].get_col(0))
       tiles.extend(self.faces['F'].get_col(0))
       tiles.extend(self.faces['D'].get_col(0))
@@ -178,8 +189,12 @@ class Cube:
       tiles.extend(self.faces['L'].get_row(2))
       tiles.extend(self.faces['L'].get_col(2))
       tiles.extend(self.faces['L'].get_row(1))
-      tiles = list(set(tiles))
-    elif 'D' in trans:
+      if 'W' in trans:
+        tiles.extend(self.faces['U'].get_col(1))
+        tiles.extend(self.faces['F'].get_col(1))
+        tiles.extend(self.faces['D'].get_col(1))
+        tiles.extend(self.faces['B'].get_col(1))
+    if 'D' in trans:
       tiles.extend(self.faces['F'].get_row(2))
       tiles.extend(self.faces['R'].get_row(2))
       tiles.extend(self.faces['B'].get_row(2))
@@ -189,27 +204,24 @@ class Cube:
       tiles.extend(self.faces['D'].get_row(2))
       tiles.extend(self.faces['D'].get_col(2))
       tiles.extend(self.faces['D'].get_row(1))
-      tiles = list(set(tiles))
-    elif 'M' in trans:
+    if 'M' in trans:
       tiles.extend(self.faces['U'].get_col(1))
       tiles.extend(self.faces['F'].get_col(1))
       tiles.extend(self.faces['D'].get_col(1))
       tiles.extend(self.faces['B'].get_col(1))
-      tiles = list(set(tiles))
-    elif 'E' in trans:
+    if 'E' in trans:
       tiles.extend(self.faces['F'].get_row(1))
       tiles.extend(self.faces['R'].get_row(1))
       tiles.extend(self.faces['B'].get_row(1))
       tiles.extend(self.faces['L'].get_row(1))
-      tiles = list(set(tiles))
-    elif 'S' in trans:
+    if 'S' in trans:
       tiles.extend(self.faces['U'].get_row(1))
       tiles.extend(self.faces['R'].get_col(1))
       tiles.extend(self.faces['D'].get_row(1))
       tiles.extend(self.faces['L'].get_col(1))
-      tiles = list(set(tiles))
-    elif ('X' in trans) or ('Y' in trans) or ('Z' in trans):
+    if ('X' in trans) or ('Y' in trans) or ('Z' in trans):
       tiles = range(54)
+    tiles = list(set(tiles))
     return tiles
 
   def transform(self, trans, times=1):
@@ -334,6 +346,26 @@ class Cube:
         self.transform("S", 3)
       elif trans == "S2":
         self.transform("S", 2)
+      elif trans == "RW":
+        self.transform("M'")
+        self.transform("R")
+      elif trans == "RW'":
+        self.transform("RW", 3)
+      elif trans == "LW":
+        self.transform("M")
+        self.transform("L")
+      elif trans == "LW'":
+        self.transform("LW", 3)
+      elif trans == "UW":
+        self.transform("E")
+        self.transform("U")
+      elif trans == "UW'":
+        self.transform("UW", 3)
+      elif trans == "FW":
+        self.transform("F")
+        self.transform("S")
+      elif trans == "FW'":
+        self.transform("FW", 3)
       elif trans == "X":
         self.transform("R")
         self.transform("M'")

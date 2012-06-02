@@ -16,23 +16,43 @@ def is_nontrivial_move(scramble):
 
 def switch_colors(blind):
   if blind:
-    curses.init_pair(1, curses.COLOR_BLUE, curses.COLOR_BLACK)
-    curses.init_pair(2, curses.COLOR_BLUE, curses.COLOR_BLACK)
-    curses.init_pair(3, curses.COLOR_BLUE, curses.COLOR_BLACK)
-    curses.init_pair(4, curses.COLOR_BLUE, curses.COLOR_BLACK)
-    curses.init_pair(5, curses.COLOR_BLUE, curses.COLOR_BLACK)
-    curses.init_pair(6, curses.COLOR_BLUE, curses.COLOR_BLACK)
-    curses.init_pair(7, curses.COLOR_BLUE, curses.COLOR_BLACK)
-    curses.init_pair(8, curses.COLOR_BLUE, curses.COLOR_BLACK)
+    if config.IN_THE_MATRIX:
+      curses.init_pair(1, curses.COLOR_BLUE, curses.COLOR_BLACK)
+      curses.init_pair(2, curses.COLOR_BLUE, curses.COLOR_BLACK)
+      curses.init_pair(3, curses.COLOR_BLUE, curses.COLOR_BLACK)
+      curses.init_pair(4, curses.COLOR_BLUE, curses.COLOR_BLACK)
+      curses.init_pair(5, curses.COLOR_BLUE, curses.COLOR_BLACK)
+      curses.init_pair(6, curses.COLOR_BLUE, curses.COLOR_BLACK)
+      curses.init_pair(7, curses.COLOR_BLUE, curses.COLOR_BLACK)
+      curses.init_pair(8, curses.COLOR_BLUE, curses.COLOR_BLACK)
+    else:
+      curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_BLUE)
+      curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_BLUE)
+      curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_BLUE)
+      curses.init_pair(4, curses.COLOR_BLACK, curses.COLOR_BLUE)
+      curses.init_pair(5, curses.COLOR_BLACK, curses.COLOR_BLUE)
+      curses.init_pair(6, curses.COLOR_BLACK, curses.COLOR_BLUE)
+      curses.init_pair(7, curses.COLOR_BLACK, curses.COLOR_BLUE)
+      curses.init_pair(8, curses.COLOR_BLACK, curses.COLOR_BLUE)
   else:
-    curses.init_pair(1, curses.COLOR_BLUE, curses.COLOR_BLACK)
-    curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLACK)
-    curses.init_pair(3, curses.COLOR_RED, curses.COLOR_BLACK)
-    curses.init_pair(4, curses.COLOR_YELLOW, curses.COLOR_BLACK)
-    curses.init_pair(5, curses.COLOR_MAGENTA, curses.COLOR_BLACK)
-    curses.init_pair(6, curses.COLOR_GREEN, curses.COLOR_BLACK)
-    curses.init_pair(7, curses.COLOR_CYAN, curses.COLOR_BLACK)
-    curses.init_pair(8, curses.COLOR_BLACK, curses.COLOR_BLACK)
+    if config.IN_THE_MATRIX:
+      curses.init_pair(1, curses.COLOR_BLUE, curses.COLOR_BLACK)
+      curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLACK)
+      curses.init_pair(3, curses.COLOR_RED, curses.COLOR_BLACK)
+      curses.init_pair(4, curses.COLOR_YELLOW, curses.COLOR_BLACK)
+      curses.init_pair(5, curses.COLOR_MAGENTA, curses.COLOR_BLACK)
+      curses.init_pair(6, curses.COLOR_GREEN, curses.COLOR_BLACK)
+      curses.init_pair(7, curses.COLOR_CYAN, curses.COLOR_BLACK)
+      curses.init_pair(8, curses.COLOR_BLACK, curses.COLOR_BLACK)
+    else:
+      curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_BLUE)
+      curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_WHITE)
+      curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_RED)
+      curses.init_pair(4, curses.COLOR_BLACK, curses.COLOR_YELLOW)
+      curses.init_pair(5, curses.COLOR_BLACK, curses.COLOR_MAGENTA)
+      curses.init_pair(6, curses.COLOR_BLACK, curses.COLOR_GREEN)
+      curses.init_pair(7, curses.COLOR_BLACK, curses.COLOR_CYAN)
+      curses.init_pair(8, curses.COLOR_BLACK, curses.COLOR_BLACK)
 
 def main(screen):
   # initialize terminal
@@ -112,6 +132,12 @@ def main(screen):
              '0' : "S", \
              'z' : "E'", \
              '/' : "E", \
+             'u' : "RW", \
+             'm' : "RW'", \
+             'r' : "LW'", \
+             'v' : "LW", \
+             't' : "FW'", \
+             'b' : "FW", \
              'q' : "Z'", \
              'p' : "Z", \
              'a' : "Y'", \

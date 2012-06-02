@@ -144,21 +144,21 @@ class CubeView:
     self.pvc.update_camera(camera)
 
   def get_trans_from_string(self, s):
-    if s == "U" or s == "Y":
+    if s == "U" or s == "Y" or s == "UW":
       axis, theta = 'y', 0.5 * math.pi
-    elif s == "U'" or s == "Y'":
+    elif s == "U'" or s == "Y'" or s == "UW'":
       axis, theta = 'y', -0.5 * math.pi
     elif s == "U2" or s == "Y2":
       axis, theta = 'y', math.pi
-    elif s == "F" or s == "Z":
+    elif s == "F" or s == "Z" or s == "FW":
       axis, theta = 'z', 0.5 * math.pi
-    elif s == "F'" or s == "Z'":
+    elif s == "F'" or s == "Z'" or s == "FW'":
       axis, theta = 'z', -0.5 * math.pi
     elif s == "F2" or s == "Z2":
       axis, theta = 'z', math.pi
-    elif s == "R" or s == "X":
+    elif s == "R" or s == "X" or s == "RW":
       axis, theta = 'x', -0.5 * math.pi
-    elif s == "R'" or s == "X'":
+    elif s == "R'" or s == "X'" or s == "RW'":
       axis, theta = 'x', 0.5 * math.pi
     elif s == "R2" or s == "X2":
       axis, theta = 'x', -math.pi
@@ -168,9 +168,9 @@ class CubeView:
       axis, theta = 'z', 0.5 * math.pi
     elif s == "B2":
       axis, theta = 'z', -math.pi
-    elif s == "L":
+    elif s == "L" or s == "LW":
       axis, theta = 'x', 0.5 * math.pi
-    elif s == "L'":
+    elif s == "L'" or s == "LW'":
       axis, theta = 'x', -0.5 * math.pi
     elif s == "L2":
       axis, theta = 'x', math.pi
