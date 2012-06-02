@@ -237,13 +237,16 @@ class CubeView:
       self.cube.transform_using_string(s)
 # -------------------------------------------------------------------
 
-  def animate_scramble(self, scramble, delay=0.000):
+  def animate_scramble(self, scramble, delay=0.000, steps_per_turn = None):
+    if steps_per_turn == None:
+      steps = config.STEPS_PER_TURN
+    else:
+      steps = steps_per_turn
     scramble = scramble.upper()
     scramble_list = scramble.split()
     for s in scramble_list:
       affected_tiles = self.cube.get_affected_tiles(s)
       axis, theta = self.get_trans_from_string(s)
-      steps = config.STEPS_PER_TURN 
       self.pvc.animate_rotation(affected_tiles, axis, theta, steps, origin = self.origin)
       self.cube.transform_using_string(s)
 #    if len(scramble_list) < 2:

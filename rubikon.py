@@ -54,6 +54,12 @@ def switch_colors(blind):
       curses.init_pair(7, curses.COLOR_BLACK, curses.COLOR_CYAN)
       curses.init_pair(8, curses.COLOR_BLACK, curses.COLOR_BLACK)
 
+def display_status(screen, message = None):
+  if message is None:
+    screen.addstr(1, 1, "                      ")
+  else:
+    screen.addstr(1, 1, message)
+
 def main(screen):
   # initialize terminal
   curses.noecho()
@@ -113,7 +119,7 @@ def main(screen):
   view.update_camera(camera)
   view.display()
   time.sleep(1.0)
-  #view.animate_scramble(scramble)
+  #view.animate_scramble(scramble, steps_per_turn = 1)
   keymap = { 'i' : "R", \
              'k' : "R'", \
              'e' : "L'", \
@@ -154,7 +160,8 @@ def main(screen):
   no_nontrivial_keypress = True
   while True:
     if c.is_solved() and not no_keypress_yet:
-      screen.addstr(1, 1, "SOLVED!")
+      display_status(screen, "SOLVED!")
+      #screen.addstr(1, 1, "SOLVED!")
       if blind and currently_blind:
         currently_blind = False
         switch_colors(currently_blind)
@@ -171,7 +178,8 @@ def main(screen):
 #      c.reset()
 #      view.reset()
     else:
-      screen.addstr(1, 1, "       ")
+      display_status(screen)
+      #screen.addstr(1, 1, "       ")
     T = -1
     while T == -1:
       T = screen.getch()
@@ -183,9 +191,12 @@ def main(screen):
       c.reset()
       view.reset()
     elif T == ord(']'):
+      display_status(screen)
+      display_status(screen, "SCRAMBLING...")
       scramble = scrambler.gen_scramble_str(scramble_len)
       #c.transform_using_string(scramble)
-      view.animate_scramble(scramble)
+      view.animate_scramble(scramble, steps_per_turn = 1)
+      display_status(screen)
     elif chr(T) in keymap.keys():
       #affected_tiles = c.get_affected_tiles(str(T))
       #axis, theta = view.get_trans_from_string(str(T))
