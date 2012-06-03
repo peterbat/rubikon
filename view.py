@@ -197,6 +197,20 @@ class PolyViewCollection:
       self.win.refresh()
       time.sleep(delay)
 
+  def animate_beamup(self, delay = 0.000):
+    steps = 50
+    dy = 0.15
+    dtheta = 2.0 * math.pi / 100.0
+    rot = matrix.roty(-dtheta)
+    for s in range(steps):
+      self.erase()
+      for v in self.views:
+        v.transform(rot, self.origin)
+        v.translate([0.0, -dy, 0.0])
+      self.draw()
+      self.win.refresh()
+      time.sleep(delay)
+
 #
 # SET UP CURSES
 #

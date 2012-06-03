@@ -220,6 +220,11 @@ def main(screen):
       no_keypress_yet = True
       view.pvc.animate_explosion()
       screen.clear()
+    elif T == ord('?'):
+      no_keypress_yet = True
+      view.pvc.animate_beamup()
+      screen.clear()
+      view.reset()
     # DEBUG-----------------------------------
 #    elif T == ord('='):
 #      if debug_focus < 53:
