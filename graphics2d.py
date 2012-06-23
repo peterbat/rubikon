@@ -161,6 +161,14 @@ class ConvexPoly:
     maxy = max(ys)
     return (minx, maxx, miny, maxy)
 
+  def is_on_screen(self, win):
+    h, w = win.getmaxyx()
+    minx, maxx, miny, maxy = self.get_minmax_xy()
+    if (maxx > w) or (minx < 0) or (maxy > h) or (miny < 0):
+      return False
+    else:
+      return True
+
   def fill(self, win, fill_color = None, char = None, erase = None):
     minx, maxx, miny, maxy = self.get_minmax_xy()
     winheight, winwidth = win.getmaxyx()

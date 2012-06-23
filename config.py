@@ -11,6 +11,7 @@ DEFAULT_CHAR = ' '
 
 # STEPS_PER_TURN: Number of animation frames per cube transformation.
 STEPS_PER_TURN = 8
+#STEPS_PER_TURN = 5
 
 SCRAMBLE_LEN = 40
 

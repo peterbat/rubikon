@@ -59,6 +59,7 @@ class PolyView:
     self.update_window_projection()
 
   def draw(self):
+    #if self.poly2d.is_on_screen(self.win):
     self.poly2d.fill(self.win)
     self.poly2d.draw(self.win)
 
