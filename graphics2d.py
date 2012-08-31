@@ -72,12 +72,13 @@ def draw_line(pi, pf, win, char=config.DEFAULT_CHAR, color_pair=None, erase = No
   y = yi
   while True:
     if (y > 0 and y < maxy - 1 and x > 0 and x < maxx - 1):
+    #if (y > 0 and y < maxy and x > 0 and x < maxx):
       if config.IN_THE_MATRIX and not erase:
         ch = random.choice(string.printable[:-6])
       else:
         ch = char
       win.addstr(y, x, ch, color_pair)
-    if x == xf and y == yf:
+    if (x == xf and y == yf):# or not (y > 0 and y < maxy and x > 0 and x < maxx):
       break
     e2 = 2 * err
     if e2 > -dy:

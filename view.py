@@ -14,7 +14,7 @@ def project_to_window(win, vec, deltaz = None, location = None, line_of_sight = 
     persp_vec = camera_transform(location, line_of_sight, parallel, deltaz, vec)
   # virtual 3d screen <----> real screen
   #    1 : 1          <---->   maxy : maxy
-  # (most terminals are wider than they are tall)
+  # (most terminals are wider than they are tall) TODO: choose smaller dim as limiter
   win_vec = [int(maxy * persp_vec[0]), int(maxy * persp_vec[1])]
   win_vec = stretch(win_vec)
   win_vec = [centerx + win_vec[0], centery + win_vec[1]]
@@ -208,6 +208,42 @@ class PolyViewCollection:
       for v in self.views:
         v.transform(rot, self.origin)
         v.translate([0.0, -dy, 0.0])
+      self.draw()
+      self.win.refresh()
+      time.sleep(delay)
+
+  def animate_synchronous_flips(self, delay = 0.000):
+    steps = 30
+    dtheta = 2.0 * math.pi / steps
+    rot = matrix.roty(-dtheta)
+    for s in range(steps):
+      self.erase()
+      for v in self.views:
+        v.transform(rot, v.compute_centroid())
+      self.draw()
+      self.win.refresh()
+      time.sleep(delay)
+  
+  def animate_synchronous_orbits(self, delay = 0.000):
+    steps = 30
+    dtheta = 2.0 * math.pi / steps
+    rots = []
+    origins = []
+    for i in range(len(self.views)):
+      rotvec = [random.random() - 0.5, \
+                random.random() - 0.5, \
+                random.random() - 0.5]
+      rots.append(matrix.rotv(rotvec, -dtheta))
+      radius = 2.0
+      center = self.views[i].compute_centroid()
+      v = [center[0] + radius * (random.random() - 0.5), \
+           center[1] + radius * (random.random() - 0.5), \
+           center[2] + radius * (random.random() - 0.5)]
+      origins.append(v)
+    for s in range(steps):
+      self.erase()
+      for i in range(len(self.views)):
+        self.views[i].transform(rots[i], origins[i])
       self.draw()
       self.win.refresh()
       time.sleep(delay)

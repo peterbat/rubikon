@@ -225,6 +225,17 @@ def main(screen):
       view.pvc.animate_beamup()
       screen.clear()
       view.reset()
+    elif T == ord('_'):
+      no_keypress_yet = True
+      view.pvc.animate_synchronous_flips()
+      screen.clear()
+      view.reset()
+    elif T == ord('+'):
+      no_keypress_yet = True
+      view.pvc.animate_synchronous_orbits()
+      #screen.clear()
+      #view.reset()
+
     # DEBUG-----------------------------------
 #    elif T == ord('='):
 #      if debug_focus < 53:
