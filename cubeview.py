@@ -32,6 +32,16 @@ class CubeView:
     self.update_camera(camera)
 
   def init_poly_views(self, win, tilesize, gapsize, origin, deltaz = 1.00):
+#    def make_xz_tile(tile_center, tilesize):
+#      radius = 0.5 * tilesize
+#      n = 4
+#      dtheta = 2.0 * math.pi / n
+#      points = []
+#      for i in range(n):
+#        points.append([tile_center[0] - radius * math.cos(i * dtheta), \
+#          tile_center[1], \
+#          tile_center[2] + radius * math.sin(i * dtheta)])
+#      return points
 
     def make_xz_tile(tile_center, tilesize):
       half = 0.5 * tilesize
