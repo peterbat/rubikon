@@ -183,6 +183,8 @@ def main(screen):
     T = -1
     while T == -1:
       T = screen.getch()
+    if T < 0 or T > 255:
+      continue
     no_keypress_yet = False
     if T == 27:
       clean_up_and_exit(screen)
