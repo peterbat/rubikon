@@ -197,7 +197,8 @@ def main(screen):
       display_status(screen, "SCRAMBLING...")
       scramble = scrambler.gen_scramble_str(scramble_len)
       #c.transform_using_string(scramble)
-      view.animate_scramble(scramble, steps_per_turn = 1)
+      #view.animate_scramble(scramble, steps_per_turn = 1)
+      view.animate_scramble_in_one_step(scramble)
       display_status(screen)
     elif chr(T) in keymap.keys():
       #affected_tiles = c.get_affected_tiles(str(T))

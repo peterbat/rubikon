@@ -269,3 +269,42 @@ class CubeView:
 #        self.sleep(delay)
 #        self.cube.transform(t)
 #        self.display()
+
+  def animate_scramble_in_one_step(self, scramble, delay=0.000, steps_per_turn = 30):
+    if steps_per_turn == None:
+      steps = config.STEPS_PER_TURN
+    else:
+      steps = steps_per_turn
+    scramble = scramble.upper()
+    scramble_list = scramble.split()
+    transform_dict = {}
+    for s in scramble_list:
+      affected_tiles = self.cube.get_affected_tiles(s)
+      self.cube.transform_using_string(s)
+      axis, theta = self.get_trans_from_string(s)
+      axis = axis.lower()
+      r = None
+      if axis == 'x':
+        r = matrix.rotx(theta)
+      elif axis == 'y':
+        r = matrix.roty(theta)
+      elif axis == 'z':
+        r = matrix.rotz(theta)
+      if r == None:
+        print "Error: rotation about invalid axis: ", axis
+        return
+      for t in affected_tiles:
+        if t not in transform_dict.keys():
+          transform_dict[t] = matrix.Matrix(list(r.data))
+        else:
+          transform_dict[t] = matrix.multiply(matrix.Matrix(list(r.data)), transform_dict[t])
+    for tile in transform_dict.keys():
+      total_transform = transform_dict[tile]
+      axis, angle = matrix.get_axis_and_angle_from_rot(total_transform)
+      dtheta = angle / steps
+      transform_dict[tile] = matrix.rotv(axis, dtheta)
+    for s in range(steps):
+      self.pvc.erase()
+      for tile in transform_dict.keys():
+        self.pvc.views[tile].transform(transform_dict[tile], self.origin)
+      self.display()
