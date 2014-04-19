@@ -270,7 +270,7 @@ class CubeView:
 #        self.cube.transform(t)
 #        self.display()
 
-  def animate_scramble_in_one_step(self, scramble, delay=0.000, steps_per_turn = 30):
+  def animate_scramble_in_one_step(self, scramble, delay=0.000, steps_per_turn = 20):
     if steps_per_turn == None:
       steps = config.STEPS_PER_TURN
     else:
